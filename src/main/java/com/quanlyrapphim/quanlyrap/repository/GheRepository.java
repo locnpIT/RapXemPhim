@@ -27,4 +27,7 @@ public interface GheRepository extends JpaRepository<GHE, Integer> {
 
     List<GHE> findGheByHangGhe(HANGGHE hangGhe);
 
+    @Query(value = "SELECT soGhe FROM SOGHE, GHE where SOGHE.idSoGhe = GHE.idSoGhe AND idGhe = :idGhe", nativeQuery = true)
+    String findSoGheByIDGhe(@Param("idGhe") int idGhe);
+
 }

@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,9 @@ import com.quanlyrapphim.quanlyrap.service.TaiKhoanService;
 import com.quanlyrapphim.quanlyrap.service.VeService;
 import com.quanlyrapphim.quanlyrap.untils.JsonStringToArray;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class HomepageController {
 
@@ -48,10 +52,11 @@ public class HomepageController {
     private final CaChieuService caChieuService;
     private final GiaVeService giaVeService;
     private final VeService veService;
+    private final PasswordEncoder passwordEncoder;
 
     public HomepageController(PhimService phimService, GheService gheService, HangGheService hangGheService,
             TaiKhoanService taiKhoanService, HoaDonService hoaDonService, CaChieuService caChieuService,
-            GiaVeService giaVeService, VeService veService) {
+            GiaVeService giaVeService, VeService veService, PasswordEncoder passwordEncoder) {
         this.gheService = gheService;
         this.phimService = phimService;
         this.hangGheService = hangGheService;
@@ -60,13 +65,16 @@ public class HomepageController {
         this.caChieuService = caChieuService;
         this.giaVeService = giaVeService;
         this.veService = veService;
+        this.passwordEncoder = passwordEncoder;
 
     }
 
     @GetMapping("/")
-    public String getHomepage(Model model) {
+    public String getHomepage(Model model, HttpServletRequest request) {
         List<PHIM> listPhim = this.phimService.getAllPhim();
         model.addAttribute("listPhim", listPhim);
+        HttpSession session = request.getSession(false);
+
         return "client/homepage/show";
     }
 
@@ -119,7 +127,10 @@ public class HomepageController {
 
     @PostMapping("/selectSeat")
     public String selectSeat(Model model, @ModelAttribute("selectedSeat") DatVe listGheChon,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+
         System.out.println(listGheChon.getIdGhe());
         int a[] = {};
         String s = listGheChon.getIdCaChieu();
@@ -128,7 +139,8 @@ public class HomepageController {
         CACHIEU cachieu = this.caChieuService.getCaChieuByIdCaChieu(Integer.parseInt(s));
 
         HOADON hoadonNew = new HOADON();
-        TAIKHOAN taikhoan = taiKhoanService.getTaiKhoanById("anhprogunnyiu");
+        String idTaiKhoan = (String) session.getAttribute("idTaiKhoan");
+        TAIKHOAN taikhoan = taiKhoanService.getTaiKhoanById(idTaiKhoan);
         GIAVE giave = this.giaVeService.getGiaVeById(1);
 
         hoadonNew.setTaiKhoan(taikhoan);
@@ -148,8 +160,17 @@ public class HomepageController {
         int idPhim = this.caChieuService.getIdPhimByIdCaChieu(Integer.parseInt(s));
         String tenPhim = this.phimService.getTenPhimByIdPhim(idPhim);
 
+        String gheNgoi = " ";
+        for (int ghe : a) {
+            char idGhe = this.hangGheService.findIdHangGheByIdGhe(ghe);
+            String hangGhe = this.hangGheService.findHangGheByIdHangGhe(idGhe);
+            String soGhe = this.gheService.findSoGheByIdGhe(ghe);
+            gheNgoi = gheNgoi + soGhe + hangGhe + " ";
+        }
+
         redirectAttributes.addFlashAttribute("tongTien", tongTien);
         redirectAttributes.addFlashAttribute("tenPhim", tenPhim);
+        redirectAttributes.addFlashAttribute("gheNgoi", gheNgoi);
 
         return "redirect:/DatVeThanhCong";
     }
@@ -171,8 +192,11 @@ public class HomepageController {
         if (bindingResult.hasErrors()) {
             return "client/auth/register";
         }
-        TAIKHOAN taikhoan = this.taiKhoanService.registerDTOToTaikhoan(registerDTO);
 
+        TAIKHOAN taikhoan = this.taiKhoanService.registerDTOToTaikhoan(registerDTO);
+        String hashPassword = this.passwordEncoder.encode(taikhoan.getMatKhau());
+
+        taikhoan.setMatKhau(hashPassword);
         taikhoan.setVaiTro(this.taiKhoanService.getVaiTroByTen("USER"));
         this.taiKhoanService.handleSubmitTaikhoan(taikhoan);
 
@@ -187,6 +211,16 @@ public class HomepageController {
     @GetMapping("/access-deny")
     public String getDenyPage() {
         return "client/auth/deny";
+    }
+
+    @GetMapping("/view-history")
+    public String getLichSuChieu(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        
+        String idTaiKhoan = (String)session.getAttribute("idTaiKhoan");
+        
+
+        return "client/ThanhToan/LichSuMuaHang";
     }
 
 }

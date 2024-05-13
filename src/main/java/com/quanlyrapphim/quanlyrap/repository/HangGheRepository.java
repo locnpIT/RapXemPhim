@@ -14,6 +14,9 @@ public interface HangGheRepository extends JpaRepository<HANGGHE, Character> {
     List<HANGGHE> findAll();
 
     @Query(value = "SELECT idHangGhe FROM GHE WHERE idGhe = :idGhe", nativeQuery = true)
-    int findHangGheIdByIdGhe(@Param("idGhe") int idGhe);
+    char findIdHangGheIdByIdGhe(@Param("idGhe") int idGhe);
+
+    @Query(value = "SELECT hangGhe FROM HANGGHE WHERE idHangGhe = :idHangGhe", nativeQuery = true)
+    String findHangGheByIdHangGhe(@Param("idHangGhe") char idHangGhe);
 
 }

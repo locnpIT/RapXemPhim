@@ -19,4 +19,12 @@ public class HangGheService {
         return this.hangGheRepository.findAll();
     }
 
+    public char findIdHangGheByIdGhe(int idGhe) {
+        return this.hangGheRepository.findIdHangGheIdByIdGhe(idGhe);
+    }
+
+    public String findHangGheByIdHangGhe(char idHangGhe){
+        return this.hangGheRepository.findHangGheByIdHangGhe(idHangGhe);
+    }
+
 }

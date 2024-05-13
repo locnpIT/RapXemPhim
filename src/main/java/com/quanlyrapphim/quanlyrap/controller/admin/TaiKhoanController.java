@@ -2,6 +2,7 @@ package com.quanlyrapphim.quanlyrap.controller.admin;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,11 @@ import com.quanlyrapphim.quanlyrap.service.TaiKhoanService;
 public class TaiKhoanController {
 
     private final TaiKhoanService taiKhoanService;
+    private final PasswordEncoder passwordEncoder;
 
-    public TaiKhoanController(TaiKhoanService taiKhoanService) {
+    public TaiKhoanController(TaiKhoanService taiKhoanService, PasswordEncoder passwordEncoder) {
         this.taiKhoanService = taiKhoanService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/admin/user")
@@ -36,7 +39,9 @@ public class TaiKhoanController {
 
     @PostMapping("/admin/user/create")
     public String postCreateUserPage(Model model, @ModelAttribute("newUser") TAIKHOAN taikhoan) {
+        String hashPassword = this.passwordEncoder.encode(taikhoan.getMatKhau());
         taikhoan.setVaiTro(this.taiKhoanService.getVaiTroByTen(taikhoan.getVaiTro().getLoaiVaiTro()));
+        taikhoan.setMatKhau(hashPassword);
         this.taiKhoanService.handleSubmitTaikhoan(taikhoan);
         return "redirect:/admin/user";
     }

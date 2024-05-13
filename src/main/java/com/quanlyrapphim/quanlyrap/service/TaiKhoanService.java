@@ -57,4 +57,8 @@ public class TaiKhoanService {
         return this.taiKhoanRepository.findByEmail(email);
     }
 
+    public TAIKHOAN getUserByEmail(String email) {
+        return this.taiKhoanRepository.findByEmail(email);
+    }
+
 }

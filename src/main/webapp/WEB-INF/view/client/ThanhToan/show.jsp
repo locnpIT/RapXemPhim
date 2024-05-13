@@ -70,6 +70,12 @@
                                                     ${tenPhim}
                                                 </p>
                                             </div>
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <h5 class="mb-0 me-4">Chỗ ngồi:</h5>
+                                                <p class="mb-0" data-cart-total-price="">
+                                                    ${gheNgoi}
+                                                </p>
+                                            </div>
                                             <!-- <div class="d-flex justify-content-between mb-4">
                                                 <h5 class="mb-0 me-4">Phòng:</h5>
                                                 <p class="mb-0" data-cart-total-price="${totalPrice}">
@@ -110,7 +116,7 @@
                                         </div> -->
                                         <a href="/"
                                             class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                            >Trở về trang chủ</a>
+                                            >Thanh toán</a>
                                     </div>
                                 </div>
                             </div>
