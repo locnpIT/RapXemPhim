@@ -166,6 +166,9 @@ public class HomepageController {
             ve.setCaChieu(cachieu);
             ve.setGiaVe(giave);
             ve.setHoaDon(hoadonNew);
+            GHE gheLo = this.gheService.getGheById(i);
+            gheLo.setTrangThai((byte) 1);
+            this.gheService.saveGhe(gheLo);
             this.veService.handleSubmit(ve);
         }
         Double tongTien = giave.getGiaVe() * soVe;

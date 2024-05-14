@@ -48,4 +48,12 @@ public class GheService {
         return this.gheRepository.findGheByHangGheAndIdPhong(idHangGhe, idPhong);
     }
 
+    public GHE getGheById(int id) {
+        return this.gheRepository.getGheById(id);
+    }
+
+    public GHE saveGhe(GHE ghe) {
+        return this.gheRepository.save(ghe);
+    }
+
 }

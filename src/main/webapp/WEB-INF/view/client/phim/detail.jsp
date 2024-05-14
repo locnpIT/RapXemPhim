@@ -56,7 +56,7 @@
             width: 100%;
             height: 500px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             grid-gap: 10px;
             text-align: center;
         }
@@ -117,7 +117,7 @@
             height: 20px;
         }
         .daBan {    
-            background-color: gainsboro;
+            background-color: lightgreen;
         }
         .dangChon {
             background-color: rgb(255, 106, 0);
@@ -132,7 +132,40 @@
             width: 40px;
             border: 2px solid blue;
         }
-        /*  */
+        /* css moi  */
+    .seat {
+  position: relative;
+  display: inline-block;
+}
+
+.seat-checkbox {
+  display: none;
+}
+
+.seat-box {
+  width: 40px;
+  height: 40px;
+  background-color: #eee;
+  border: 2px solid #ddd;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seat-checkbox:checked + .seat-box {
+  background-color: #ffa500; 
+}
+
+/*  
+    disable checkbox
+*/
+.pseudo-disabled {
+    pointer-events: none; /* Ngăn không cho người dùng click vào checkbox */
+    opacity: 0.4; /* Làm mờ checkbox để trông giống như đã bị disable */
+}
+ 
+
+       
 
     </style>
 
@@ -290,48 +323,90 @@
 
                                 <div id="hangGheGiua">
                                     <c:forEach var="gheA" items="${listGheHangA}">
-                                        <input type="checkbox" name="${gheA.idGhe}" data-id-ghe="${gheA.idGhe}">
-                                        <label for="{gheA.idGhe}">${gheA.soGhe.soGhe}</label>
+                                        <label class="seat ${gheA.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheA.idGhe}"  data-id-ghe="${gheA.idGhe}">
+                                            <span class="seat-box">${gheA.soGhe.soGhe}</span>
+                                        </label>
+                                          
+
+                                        
+                                        <!-- <input type="checkbox" name="${gheA.idGhe}" data-id-ghe="${gheA.idGhe}">
+                                        <label for="{gheA.idGhe}">${gheA.soGhe.soGhe}</label> -->
                                     </c:forEach>
 
                                     <c:forEach var="gheB" items="${listGheHangB}">
-                                        <input type="checkbox" name="${gheB.idGhe}" data-id-ghe="${gheB.idGhe}">
-                                        <label for="{gheB.idGhe}">${gheB.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheB.idGhe}" data-id-ghe="${gheB.idGhe}">
+                                        <label for="{gheB.idGhe}">${gheB.soGhe.soGhe}</label> -->
+                                        <label class="seat ${gheB.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheB.idGhe}" data-id-ghe="${gheB.idGhe}">
+                                            <span class="seat-box">${gheB.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheC" items="${listGheHangC}">
-                                        <input type="checkbox" name="${gheC.idGhe}" data-id-ghe="${gheC.idGhe}">
-                                        <label for="{gheC.idGhe}">${gheC.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheC.idGhe}" data-id-ghe="${gheC.idGhe}">
+                                        <label for="{gheC.idGhe}">${gheC.soGhe.soGhe}</label> -->
+
+                                        <label class="seat ${gheC.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheC.idGhe}" data-id-ghe="${gheC.idGhe}">
+                                            <span class="seat-box">${gheC.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheD" items="${listGheHangD}">
-                                        <input type="checkbox" name="${gheD.idGhe}" data-id-ghe="${gheD.idGhe}">
-                                        <label for="{gheD.idGhe}">${gheD.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheD.idGhe}" data-id-ghe="${gheD.idGhe}">
+                                        <label for="{gheD.idGhe}">${gheD.soGhe.soGhe}</label> -->
+                                        <label class="seat ${gheD.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheD.idGhe}" data-id-ghe="${gheD.idGhe}">
+                                            <span class="seat-box">${gheD.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheE" items="${listGheHangE}">
-                                        <input type="checkbox" name="${gheE.idGhe}" data-id-ghe="${gheE.idGhe}">
-                                        <label for="{gheE.idGhe}">${gheE.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheE.idGhe}" data-id-ghe="${gheE.idGhe}">
+                                        <label for="{gheE.idGhe}">${gheE.soGhe.soGhe}</label> -->
+
+                                        <label class="seat ${gheE.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheE.idGhe}" data-id-ghe="${gheE.idGhe}">
+                                            <span class="seat-box">${gheE.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
                                     
                                     <c:forEach var="gheF" items="${listGheHangF}">
-                                        <input type="checkbox" name="${gheF.idGhe}" data-id-ghe="${gheF.idGhe}">
-                                        <label for="{gheF.idGhe}">${gheF.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheF.idGhe}" data-id-ghe="${gheF.idGhe}">
+                                        <label for="{gheF.idGhe}">${gheF.soGhe.soGhe}</label> -->
+                                        <label class="seat ${gheF.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheF.idGhe}" data-id-ghe="${gheF.idGhe}">
+                                            <span class="seat-box">${gheF.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheG" items="${listGheHangG}">
-                                        <input type="checkbox" name="${gheG.idGhe}" data-id-ghe="${gheG.idGhe}">
-                                        <label for="{gheG.idGhe}">${gheG.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheG.idGhe}" data-id-ghe="${gheG.idGhe}">
+                                        <label for="{gheG.idGhe}">${gheG.soGhe.soGhe}</label> -->
+
+                                        <label class="seat ${gheG.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheG.idGhe}" data-id-ghe="${gheG.idGhe}">
+                                            <span class="seat-box">${gheG.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheH" items="${listGheHangH}">
-                                        <input type="checkbox" name="${gheH.idGhe}" data-id-ghe="${gheH.idGhe}">
-                                        <label for="{gheH.idGhe}">${gheH.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheH.idGhe}" data-id-ghe="${gheH.idGhe}">
+                                        <label for="{gheH.idGhe}">${gheH.soGhe.soGhe}</label> -->
+                                        <label class="seat ${gheH.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheH.idGhe}" data-id-ghe="${gheH.idGhe}"  >
+                                            <span class="seat-box">${gheH.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
 
                                     <c:forEach var="gheI" items="${listGheHangI}">
-                                        <input type="checkbox" name="${gheI.idGhe}" data-id-ghe="${gheI.idGhe}">
-                                        <label for="{gheI.idGhe}">${gheI.soGhe.soGhe}</label>
+                                        <!-- <input type="checkbox" name="${gheI.idGhe}" data-id-ghe="${gheI.idGhe}">
+                                        <label for="{gheI.idGhe}">${gheI.soGhe.soGhe}</label> -->
+                                        <label class="seat ${gheI.trangThai == 1 ? 'daBan pseudo-disabled' : ''}">
+                                            <input type="checkbox" class="seat-checkbox" name="${gheI.idGhe}" data-id-ghe="${gheI.idGhe}">
+                                            <span class="seat-box">${gheI.soGhe.soGhe}</span>
+                                        </label>
                                     </c:forEach>
                                  <!--  -->
                                 </div>

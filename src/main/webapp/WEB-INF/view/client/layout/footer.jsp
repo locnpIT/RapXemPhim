@@ -7,8 +7,8 @@
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <a href="#">
-                            <h1 class="text-primary mb-0">Fruitables</h1>
-                            <p class="text-secondary mb-0">Fresh products</p>
+                            <h1 class="text-primary mb-0">Rạp xem phim 22T3</h1>
+                            <p class="text-secondary mb-0">Phim không hay, Không lấy tiền</p>
                         </a>
                     </div>
                     <div class="col-lg-6">
@@ -30,9 +30,8 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
-                        <h4 class="text-light mb-3">Tại sao nên mua tại cửa hàng chúng tôi?</h4>
-                        <p class="mb-4">Chúng tôi có các cửa hàng trên khắp 63 tỉnh thành, quận huyện. Với chính sách bảo hành
-                            và chăm sóc khách hàng, chúng tôi đảm bảo bạn sẽ hài lòng với dịch vụ của chúng tôi.
+                        <h4 class="text-light mb-3">Tại sao nên xem phim tại rạp của chúng tôi</h4>
+                        <p class="mb-4">Rạp chúng tôi siêu sang, xịn, ghế ngồi thoải mái êm ái, riêng tư
                         </p>
                         <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
                     </div>

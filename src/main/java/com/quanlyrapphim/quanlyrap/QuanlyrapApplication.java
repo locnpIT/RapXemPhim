@@ -10,7 +10,7 @@ public class QuanlyrapApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(QuanlyrapApplication.class, args);
-		
+
 	}
 
 }
