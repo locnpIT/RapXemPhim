@@ -1,5 +1,7 @@
 package com.quanlyrapphim.quanlyrap.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.quanlyrapphim.quanlyrap.domain.VE;
@@ -16,6 +18,10 @@ public class VeService {
 
     public VE handleSubmit(VE ve) {
         return this.veRepository.save(ve);
+    }
+
+    public List<VE> getVeByIdHoaDon(int idHoaDon) {
+        return this.veRepository.getListVeByIdHoaDon(idHoaDon);
     }
 
 }

@@ -70,13 +70,7 @@
                                                     ${tenPhim}
                                                 </p>
                                             </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <h5 class="mb-0 me-4">Chỗ ngồi:</h5>
-                                                <p class="mb-0" data-cart-total-price="">
-                                                    ${gheNgoi}
-                                                </p>
-                                            </div>
-                                            
+    
                                             <div class="d-flex justify-content-between mb-4">
                                                 <h5 class="mb-0 me-4">Tổng tiền:</h5>
                                                 <p class="mb-0" data-cart-total-price="${tongTien}">
@@ -85,15 +79,10 @@
                                             </div>
                                             
                                         </div>
-                                        <!-- <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                                            <h5 class="mb-0 ps-4 me-4">Tổng số tiền</h5>
-                                            <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
-                                                <fmt:formatNumber type="number" value="${totalPrice}" /> đ
-                                            </p>
-                                        </div> -->
+                                       
                                         <a href="/"
                                             class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                            >Thanh toán</a>
+                                            >Về trang chủ</a>
                                     </div>
                                 </div>
                             </div>

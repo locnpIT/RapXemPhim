@@ -44,4 +44,8 @@ public class GheService {
         return this.gheRepository.findSoGheByIDGhe(idGhe);
     }
 
+    public List<GHE> findGheByIdHangGheAndIdPhong(Character idHangGhe, String idPhong) {
+        return this.gheRepository.findGheByHangGheAndIdPhong(idHangGhe, idPhong);
+    }
+
 }

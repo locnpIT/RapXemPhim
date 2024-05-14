@@ -56,34 +56,29 @@
                         </div>
                         <hr>
         
+                        <div class="d-flex justify-content-between">
+                            <h3>Lịch sử mua hàng</h3>
+                        </div>
                         <table class="table table-bordered table-hover">
-                            <div class="d-flex justify-content-between">
-                                <h3>Lịch sử mua hàng</h3>
-                            </div>
                             <thead>
                                 <tr>
-                                    <th>Tên phim</th>
-                                    <th>Ghế</th>
-                                    <th>Giá vé</th>
+                                    <th>Mã Hóa đơn</th>
                                     <th>Ngày đặt</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <c:forEach var="user" items=""> -->
+                                <c:forEach var="hoaDon" items="${hoaDonNguoiDung}">
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>${hoaDon.idHoaDon}</td>
+                                        <td>${hoaDon.ngayXuatHoaDon}</td>
                                         <td>
-                                            <a
-                                            href="" 
-                                            class="btn btn-success">View</a>
-                                            <a href="" class="btn btn-warning mx-2">Update</a>
-                                            <a href="/" class="btn btn-danger">Delete</button>
-            
+                                            <a href="/view-hoadon-history/${hoaDon.idHoaDon}" class="btn btn-success">Xem chi tiết hóa đơn</a>
                                         </td>
                                     </tr>
-                                <!-- </c:forEach> -->
+                                </c:forEach>
+                            </tbody>
+                        </table>
                             </tbody>
                         </table>
                     </div>

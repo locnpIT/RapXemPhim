@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.quanlyrapphim.quanlyrap.domain.GHE;
 import com.quanlyrapphim.quanlyrap.domain.HANGGHE;
+import com.quanlyrapphim.quanlyrap.domain.PHONGCHIEU;
 
 import jakarta.transaction.Transactional;
 
@@ -29,5 +30,8 @@ public interface GheRepository extends JpaRepository<GHE, Integer> {
 
     @Query(value = "SELECT soGhe FROM SOGHE, GHE where SOGHE.idSoGhe = GHE.idSoGhe AND idGhe = :idGhe", nativeQuery = true)
     String findSoGheByIDGhe(@Param("idGhe") int idGhe);
+
+    @Query(value = "SELECT * FROM GHE WHERE GHE.idHangGhe = :idHangGhe AND GHE.idPhong = :idPhong", nativeQuery = true)
+    List<GHE> findGheByHangGheAndIdPhong(@Param("idHangGhe") Character idHangGhe, @Param("idPhong") String idPhong);
 
 }

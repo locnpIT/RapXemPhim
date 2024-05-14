@@ -1,5 +1,7 @@
 package com.quanlyrapphim.quanlyrap.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.quanlyrapphim.quanlyrap.domain.HOADON;
@@ -15,6 +17,10 @@ public class HoaDonService {
 
     public HOADON handleSave(HOADON hoadon) {
         return this.hoaDonRepository.save(hoadon);
+    }
+
+    public List<HOADON> getListHoaDonByUserId(String idUser) {
+        return this.hoaDonRepository.getListHoaDonByUserId(idUser);
     }
 
 }

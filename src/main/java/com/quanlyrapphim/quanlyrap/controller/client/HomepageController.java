@@ -95,15 +95,31 @@ public class HomepageController {
         HANGGHE h = new HANGGHE('H', "H");
         HANGGHE i = new HANGGHE('I', "I");
 
-        List<GHE> listGheTheoHangGheA = this.gheService.findGheByHangGhe(a);
-        List<GHE> listGheTheoHangGheB = this.gheService.findGheByHangGhe(b);
-        List<GHE> listGheTheoHangGheC = this.gheService.findGheByHangGhe(c);
-        List<GHE> listGheTheoHangGheD = this.gheService.findGheByHangGhe(d);
-        List<GHE> listGheTheoHangGheE = this.gheService.findGheByHangGhe(e);
-        List<GHE> listGheTheoHangGheF = this.gheService.findGheByHangGhe(f);
-        List<GHE> listGheTheoHangGheG = this.gheService.findGheByHangGhe(g);
-        List<GHE> listGheTheoHangGheH = this.gheService.findGheByHangGhe(h);
-        List<GHE> listGheTheoHangGheI = this.gheService.findGheByHangGhe(i);
+        String idPhong = " ";
+        for (CACHIEU cachieu : cachieus) {
+            idPhong = cachieu.getPhongChieu().getIdPhong();
+            break;
+        }
+
+        // List<GHE> listGheTheoHangGheA = this.gheService.findGheByHangGhe(a);
+        // List<GHE> listGheTheoHangGheB = this.gheService.findGheByHangGhe(b);
+        // List<GHE> listGheTheoHangGheC = this.gheService.findGheByHangGhe(c);
+        // List<GHE> listGheTheoHangGheD = this.gheService.findGheByHangGhe(d);
+        // List<GHE> listGheTheoHangGheE = this.gheService.findGheByHangGhe(e);
+        // List<GHE> listGheTheoHangGheF = this.gheService.findGheByHangGhe(f);
+        // List<GHE> listGheTheoHangGheG = this.gheService.findGheByHangGhe(g);
+        // List<GHE> listGheTheoHangGheH = this.gheService.findGheByHangGhe(h);
+        // List<GHE> listGheTheoHangGheI = this.gheService.findGheByHangGhe(i);
+
+        List<GHE> listGheTheoHangGheA = this.gheService.findGheByIdHangGheAndIdPhong(a.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheB = this.gheService.findGheByIdHangGheAndIdPhong(b.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheC = this.gheService.findGheByIdHangGheAndIdPhong(c.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheD = this.gheService.findGheByIdHangGheAndIdPhong(d.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheE = this.gheService.findGheByIdHangGheAndIdPhong(e.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheF = this.gheService.findGheByIdHangGheAndIdPhong(f.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheG = this.gheService.findGheByIdHangGheAndIdPhong(g.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheH = this.gheService.findGheByIdHangGheAndIdPhong(h.getIdHangGhe(), idPhong);
+        List<GHE> listGheTheoHangGheI = this.gheService.findGheByIdHangGheAndIdPhong(i.getIdHangGhe(), idPhong);
 
         model.addAttribute("phim", currentPhim);
         model.addAttribute("listHangGhe", listHangGhe);
@@ -117,10 +133,6 @@ public class HomepageController {
         model.addAttribute("listGheHangH", listGheTheoHangGheH);
         model.addAttribute("listGheHangI", listGheTheoHangGheI);
         model.addAttribute("listCaChieu", cachieus);
-
-        for (CACHIEU cachieu : cachieus) {
-
-        }
 
         return "client/phim/detail";
     }
@@ -216,11 +228,33 @@ public class HomepageController {
     @GetMapping("/view-history")
     public String getLichSuChieu(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        
-        String idTaiKhoan = (String)session.getAttribute("idTaiKhoan");
-        
 
+        String idTaiKhoan = (String) session.getAttribute("idTaiKhoan");
+        List<HOADON> hoaDonNguoiDung = this.hoaDonService.getListHoaDonByUserId(idTaiKhoan);
+        model.addAttribute("hoaDonNguoiDung", hoaDonNguoiDung);
         return "client/ThanhToan/LichSuMuaHang";
+    }
+
+    @GetMapping("/view-hoadon-history/{id}")
+    public String getHistoryHoaDonPage(Model model, @PathVariable int id) {
+        List<VE> listVe = this.veService.getVeByIdHoaDon(id);
+        double tien = 0;
+        int cachieu = 0;
+        for (VE ve : listVe) {
+            tien = ve.getGiaVe().getGiaVe();
+            cachieu = ve.getCaChieu().getIdCaChieu();
+            break;
+        }
+        int soVe = listVe.size();
+        double tongTien = tien * soVe;
+
+        CACHIEU caChieu = this.caChieuService.getCaChieuByIdCaChieu(cachieu);
+        String tenPhim = caChieu.getPhim().getTenPhim();
+
+        model.addAttribute("tongTien", tongTien);
+        model.addAttribute("tenPhim", tenPhim);
+
+        return "client/ThanhToan/XemLichSuHoaDon";
     }
 
 }

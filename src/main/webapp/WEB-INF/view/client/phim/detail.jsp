@@ -34,6 +34,8 @@
     </head>
     
     <style>
+
+        
                 /*  */
         #manHinh {
             width: 100%;
@@ -283,7 +285,9 @@
                                         </c:forEach>
                                     </ul>
                                 </div>
-                        
+                                
+                                
+
                                 <div id="hangGheGiua">
                                     <c:forEach var="gheA" items="${listGheHangA}">
                                         <input type="checkbox" name="${gheA.idGhe}" data-id-ghe="${gheA.idGhe}">
@@ -477,9 +481,6 @@
                 $('#idCaChieuInput').val(selectedCaChieuId);
             });
         });
-
-        
-    
 
     </script>
     
